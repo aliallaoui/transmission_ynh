@@ -9,6 +9,7 @@ app=$YNH_APP_INSTANCE_NAME
 # Retrieve arguments
 domain=$YNH_APP_ARG_DOMAIN
 path=$YNH_APP_ARG_PATH
+datapath=$YNH_APP_ARG_DATAPATH
 
 sudo yunohost app checkurl $domain$path -a $app
 if [[ ! $? -eq 0 ]]; then
@@ -35,11 +36,11 @@ sudo yunohost firewall allow TCP 51413 > /dev/null 2>&1
 sudo apt-get install transmission-daemon -y -qq
 
 # Make directories and set rights
-sudo mkdir -p /home/yunohost.transmission/{progress,completed}
-sudo chown -R debian-transmission:www-data /home/yunohost.transmission/
-sudo chown -R debian-transmission:debian-transmission /home/yunohost.transmission/progress
-sudo find /home/yunohost.transmission/ -type f | while read LINE; do sudo chmod 640 "$LINE" ; done
-sudo find /home/yunohost.transmission/ -type d | while read LINE; do sudo chmod 750 "$LINE" ; done
+sudo mkdir -p $datapath/{progress,completed}
+sudo chown -R debian-transmission:www-data $datapath/
+sudo chown -R debian-transmission:debian-transmission $datapath/progress
+sudo find $datapath/ -type f | while read LINE; do sudo chmod 640 "$LINE" ; done
+sudo find $datapath/ -type d | while read LINE; do sudo chmod 750 "$LINE" ; done
 
 # Configure Transmission and reload
 sed -i "s@PATHTOCHANGE@$path@g" ../conf/settings.json

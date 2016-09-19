@@ -37,6 +37,15 @@
         },
         "example": "/torrent",
         "default": "/torrent"
+      },
+      {
+        "name": "datapath",
+        "type": "path",
+        "ask": {
+          "en": "Choose a path for data"
+        },
+        "example": "/media/Downloads",
+        "default": "/home/yunohost.transmission"
       }
     ]
   }
