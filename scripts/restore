@@ -12,6 +12,7 @@ app=$YNH_APP_INSTANCE_NAME
 # Retrieve arguments
 domain=$(sudo yunohost app setting $app domain)
 path=$(sudo yunohost app setting $app path)
+data_path=$(sudo yunohost app setting $app datapath)
 
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $app
@@ -27,7 +28,6 @@ sources_path=/usr/share/transmission
 #     exit 1
 # fi
 
-data_path=/home/yunohost.transmission
 if [ -d $data_path ]; then
     echo "There is already a directory: $data_path " | sudo tee /dev/stderr
     exit 1

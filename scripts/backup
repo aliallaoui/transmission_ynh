@@ -11,13 +11,14 @@ app=$YNH_APP_INSTANCE_NAME
 
 # Retrieve arguments
 domain=$(sudo yunohost app setting $app domain)
+datapath=$(sudo yunohost app setting $app datapath)
 
 # Backup directory location for the app from where the script is executed and 
 # which will be compressed afterward
 backup_dir=$YNH_APP_BACKUP_DIR
 
 # Backup sources & data
-ynh_backup "/home/yunohost.transmission" "data"
+ynh_backup "$datapath" "data"
 ynh_backup "/usr/share/transmission" "sources"
 
 # Copy configuration files
