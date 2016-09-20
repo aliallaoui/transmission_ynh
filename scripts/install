@@ -44,6 +44,7 @@ sudo find $datapath/ -type d | while read LINE; do sudo chmod 750 "$LINE" ; done
 
 # Configure Transmission and reload
 sed -i "s@PATHTOCHANGE@$path@g" ../conf/settings.json
+sed -i "s@DATAPATHTOCHANGE@$datapath@g" ../conf/settings.json
 sudo cp ../conf/settings.json /etc/transmission-daemon/settings.json
 sudo service transmission-daemon reload
 
@@ -57,5 +58,6 @@ sudo sed -i "s@<div id=\"toolbar-inspector\" title=\"Toggle Inspector\"></div>@<
 
 # Configure Nginx and reload
 sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
+sed -i "s@DATAPATHTOCHANGE@$datapath@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
